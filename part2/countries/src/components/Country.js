@@ -16,6 +16,7 @@ const Display = ({countries}) => {
         }
         </ul>
         <img src={countries.flags.png} alt={countries.flag}/>
+        <h3>Weather in {countries.capital}</h3>
         </>
     )
 }
