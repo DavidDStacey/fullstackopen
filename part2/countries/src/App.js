@@ -23,23 +23,14 @@ function App() {
   }
 
   const btnClick = (event) => {
-    console.log('clicked')
-    console.log(event.target.value)
-    setSearch(event.target.value.toLowerCase())
+    //setSearch(event.target.value.toLowerCase())
     setShowCountryList(countries.filter(country => country.name.common.toLowerCase().includes(event.target.value.toLowerCase())))
-    console.log('done')
 }
 
   return (
     <>
       Find Countries <input value={search} onChange={handleSearch}/>
       <br />  
-
-      {console.log('List of countries')}
-      {console.log(showCountriesList)}
-      {console.log('Search string')}
-      {console.log(search)}
-
       <Search
       showCountriesList={showCountriesList} 
       btnClick={btnClick}/>

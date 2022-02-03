@@ -1,7 +1,6 @@
 import React from 'react'
 import Country from './Country'
 
-
 const Search = ({ showCountriesList, btnClick }) => {
 
     if(showCountriesList.length < 10) {
