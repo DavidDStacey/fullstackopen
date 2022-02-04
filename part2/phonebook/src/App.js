@@ -44,7 +44,7 @@ const App = () => {
         
         personsService
           .create(personObject)
-          .then(returnedPerson => {
+            .then(returnedPerson => {
             setPersons(persons.concat(returnedPerson))
           })
         setNewName('')
@@ -58,6 +58,7 @@ const App = () => {
     }
     else {
       if(window.confirm(newName + ' is in phonebook, replace old number with new?')) {
+        /*
         const id = persons.filter(person => person.name === newName)[0].id
         const personsFound = persons.find(n => n.id === id)
         const changedPersons = { ...personsFound, number: personObject.number}
@@ -67,7 +68,10 @@ const App = () => {
           .then(returnedPerson => {
             setPersons(persons.map(p => p.id !== id ? p : returnedPerson))
         })
-      }      
+      }    */
+      window.confirm('Not implemented' + newName + ' is in phonebook, replace old number with new?')
+    }
+
       setNewName('')
       setNewNumber('')
     }
@@ -99,7 +103,7 @@ const App = () => {
     }
     setSearch('')
   }
-
+  
   return (
     <div>
       <h2>Phonebook</h2>
