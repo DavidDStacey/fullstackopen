@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 app.use(cors())
+app.use(express.static('build'))
 app.use(express.json())
 
 app.use(morgan((tokens, req, res) => {
@@ -38,13 +39,13 @@ let persons =
       "id": "Mary Poppendieck",
       "name": "Mary Poppendieck", 
       "number": "39-23-6423122"
+    },
+    { 
+      "id": "Bill Nye",
+      "name": "Bill Nye", 
+      "number": "39-23-6423122"
     }
 ]
-
-app.get('/', (request, response) => 
-{
-    response.send('Hello World')
-})
 
 app.get('/api/persons/', (request, response) => 
 {
@@ -93,7 +94,7 @@ app.post('/api/persons/', (request, response) => {
     response.json(person)
 })
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
   })

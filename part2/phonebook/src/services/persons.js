@@ -1,6 +1,6 @@
 import axios from 'axios'
-const baseUrl = 'https://dsphonebook.herokuapp.com/api/persons'
-
+//const baseUrl = 'https://dsphonebook.herokuapp.com/api/persons'
+const baseUrl = '/api/persons'
 
 const getAll = () => {
   console.log('Requesting: ' + baseUrl)
