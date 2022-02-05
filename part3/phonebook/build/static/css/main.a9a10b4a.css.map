@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.a9a10b4a.css","mappings":"AAAA,GACI,WAAY,CACZ,iBACJ,CAIA,YACI,YAAa,CAEb,cAAe,CADf,eAEF","sources":["index.css"],"sourcesContent":["h2 {\r\n    color: green;\r\n    font-style: italic;\r\n}\r\n\r\n\r\n\r\n.personList {\r\n    color: purple;\r\n    padding-top: 5px;\r\n    font-size: 15px;\r\n  }"],"names":[],"sourceRoot":""}
