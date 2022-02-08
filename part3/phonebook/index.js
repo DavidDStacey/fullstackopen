@@ -26,14 +26,14 @@ app.get('/', (req, res) => {
   res.send('Phonebook Backend')
 })
 
-app.get('/api/persons/', (request, response) => 
+app.get('/api/persons', (request, response) => 
 {
   Person.find({}).then(persons=>{
     response.json(persons)
   })
 })
 
-app.get('/info/', (request, response) => 
+app.get('/info', (request, response) => 
 {
   Person.find({}).then(results => {
     response.send(`Phonebook has info for ${results.length} people` + "\n" + new Date())
@@ -61,7 +61,7 @@ app.delete('/api/persons/:id', (request, response) => {
   .catch(error => next(error))
 })
 
-app.post('/api/persons/', (request, response) => {
+app.post('/api/persons', (request, response) => {
   if (!request.body.name || !request.body.number) {
     return response.status(400).json({
         error: 'content missing'
