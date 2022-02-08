@@ -29,8 +29,13 @@ const App = () => {
     if (newName === '' || newNumber === '') {
       console.log('Cannot be empty')
       window.alert('Form cannot be empty')
-    }
-    else if(persons.filter(person => person.name === newName).length === 0) {
+    } else if (newName.length !== 3) {
+      console.log('Name must be at least 3 characters')
+      window.alert('Name must be at least 3 characters')
+    } else if (newNumber.length !== 10) {
+      console.log('Number must be 10 characters')
+      window.alert('Number must be 10 characters')
+    } else if(persons.filter(person => person.name === newName).length === 0) {
       if(persons.filter(person => person.number === newNumber).length === 0) {
         console.log('New person added')
         
@@ -41,14 +46,12 @@ const App = () => {
           })
         setNewName('')
         setNewNumber('')
-      }
-      else{
+      } else{
         console.log(`Number ${newNumber} already exist`)
         setNewName('')
         setNewNumber('')
       }
-    }
-    else {
+    } else {
       if(window.confirm(newName + ' is in phonebook, replace old number with new?')) {
         const id = persons.filter(person => person.name === newName)[0].id
         const personsFound = persons.find(n => n.id === id)
