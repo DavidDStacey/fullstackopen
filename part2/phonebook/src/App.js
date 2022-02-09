@@ -29,7 +29,8 @@ const App = () => {
     if (newName === '' || newNumber === '') {
       console.log('Cannot be empty')
       window.alert('Form cannot be empty')
-    } else if (newName.length !== 3) {
+    } else if (newName.length < 3) {
+      console.log('name is ' + newName.length + ' characters long')
       console.log('Name must be at least 3 characters')
       window.alert('Name must be at least 3 characters')
     } else if (newNumber.length !== 10) {
