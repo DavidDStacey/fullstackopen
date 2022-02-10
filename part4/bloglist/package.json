@@ -4,25 +4,29 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "start": "node index.js",
-      "dev": "nodemon index.js",
-      "server": "json-server -p3001 --watch db.json",
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "lint": "eslint ."
+        "start": "cross-env NODE_ENV=production node index.js",
+        "dev": "cross-env NODE_ENV=development nodemon index.js",
+        "server": "json-server -p3001 --watch db.json",
+        "lint": "eslint .",
+        "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "axios": "^0.25.0",
-      "cors": "^2.8.5",
-      "dotenv": "^16.0.0",
-      "express": "^4.17.2",
-      "mongoose": "^6.2.0",
-      "morgan": "^1.10.0",
-      "nodemon": "^2.0.15"
+        "axios": "^0.25.0",
+        "cors": "^2.8.5",
+        "cross-env": "^7.0.3",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.2",
+        "express-async-errors": "^3.1.1",
+        "lodash": "^4.17.21",
+        "mongoose": "^6.2.0",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.15"
     },
     "devDependencies": {
-      "eslint": "^8.8.0"
+        "eslint": "^8.8.0",
+        "jest": "^27.5.1",
+        "supertest": "^6.2.2"
     }
-  }
-  
+}
