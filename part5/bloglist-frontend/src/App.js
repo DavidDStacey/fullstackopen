@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
+import LoginForm from './components/LoginForm'
+import BlogForm from './components/BlogForm'
+import BlogList from './components/BlogList'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -11,10 +13,16 @@ const App = () => {
   const [username, setUsername] = useState('')   
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
+  const [toggleAddBlog, settoggleAddBlog] = useState(false)
+  const hideWhenVisible = { display: toggleAddBlog ? 'none' : '' }
+  const showWhenVisible = { display: toggleAddBlog ? '' : 'none' }
+  const [toggleShowBlog, settoggleShowBlog] = useState(false)
+  const hideShowWhenVisible = { display: toggleShowBlog ? 'none' : '' }
+  const showShowWhenVisible = { display: toggleShowBlog ? '' : 'none' }
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
-      setBlogs( blogs )
+      setBlogs( blogs.sort((a, b) => b.likes - a.likes) )
     )  
   }, [])
 
@@ -46,11 +54,7 @@ const App = () => {
     try {
       await blogService.create(newBlog).then(returnedblog => {
         setBlogs(blogs.concat(returnedblog))
-      }).then(
-        setErrorMessage('Blog added'),
-        setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000))
+      })
     } catch (exception) {
       setErrorMessage('Form must be filled out completely')
       setTimeout(() => {
@@ -60,6 +64,7 @@ const App = () => {
     
     var form = document.getElementById('addBlogForm')
     form.reset()
+    settoggleAddBlog(!toggleAddBlog)
   }
 
   const handleLogin = async (event) => {
@@ -82,61 +87,6 @@ const App = () => {
     }
   }
 
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username <input type="text" 
-          value={username} 
-          name="Username" 
-          onChange={({ target }) => 
-            setUsername(target.value)} 
-        />
-      </div>
-      <div>
-        password <input type="text" 
-          value={password} 
-          name="Password" 
-          onChange={({ target }) => 
-            setPassword(target.value)} 
-        />
-      </div>
-      <button type='submit'>Login</button>
-    </form>  
-  )
-
-  const blogForm = () => (
-    <>
-      <form onSubmit={addBlog} id="addBlogForm">
-        Add New Blog
-        <br />
-        <br />
-        Title
-        <input
-          value={newBlog.title}
-          onChange={handleBlogChange}
-        />
-        <br />
-        Author
-        <input
-          value={newBlog.author}
-          onChange={handleBlogChange}
-        />
-        <br />
-        URL
-        <input
-          value={newBlog.url}
-          onChange={handleBlogChange}
-        />
-        <br />
-        <button type="submit">save</button>
-      </form> 
-      <br />
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )} 
-    </>
-  )
-
   const logoutClick = () => {
     setUser(null)
     window.localStorage.removeItem('loggedBlogappUser')
@@ -153,13 +103,19 @@ const App = () => {
       {<Notification message={errorMessage} />}
 
       {user === null ?
-      loginForm() :
+      <LoginForm handleLogin={handleLogin} username={username} setUsername={setUsername} password={password} setPassword={setPassword} /> :
       <div>
         <p>
           {user.name} 
           <button onClick={logoutClick}>Logout</button>
         </p>
-        {blogForm()}
+        <button style={hideWhenVisible} onClick={() => {settoggleAddBlog(!toggleAddBlog)}} >Add Blog</button>
+        {toggleAddBlog ? <BlogForm addBlog={addBlog} newBlog={newBlog} handleBlogChange={handleBlogChange} /> : <></>}
+        <button style={showWhenVisible} onClick={() => {settoggleAddBlog(!toggleAddBlog)}} >Cancel Add</button>
+        <br />
+        <button style={hideShowWhenVisible} onClick={() => {settoggleShowBlog(!toggleShowBlog)}}>Show blogs</button>
+        <button style={showShowWhenVisible} onClick={() => {settoggleShowBlog(!toggleShowBlog)}}>Hide blogs</button>
+        {toggleShowBlog ? <BlogList blogs={blogs} setBlogs={setBlogs} />  : <></>}
       </div>
       }
     </div>
