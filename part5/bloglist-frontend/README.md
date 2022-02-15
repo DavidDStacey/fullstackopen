@@ -9,5 +9,5 @@ password: test <br/>
 <br/>
 User is only able to delete blogs added by that account
 
-data stored in mongodb
+data stored in mongodb <br/>
 built using React and node
