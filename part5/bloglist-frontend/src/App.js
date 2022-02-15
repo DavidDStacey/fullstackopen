@@ -115,7 +115,7 @@ const App = () => {
         <br />
         <button style={hideShowWhenVisible} onClick={() => {settoggleShowBlog(!toggleShowBlog)}}>Show blogs</button>
         <button style={showShowWhenVisible} onClick={() => {settoggleShowBlog(!toggleShowBlog)}}>Hide blogs</button>
-        {toggleShowBlog ? <BlogList blogs={blogs} setBlogs={setBlogs} />  : <></>}
+        {toggleShowBlog ? <BlogList blogs={blogs} setBlogs={setBlogs} username={user.username} setErrorMessage={setErrorMessage}/>  : <></>}
       </div>
       }
     </div>

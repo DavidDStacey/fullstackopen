@@ -22,9 +22,9 @@ Content-Type: application/json
 
 {
     "blogs": [],
-    "username": "us",
-    "name": "user",
-    "password": "user"
+    "username": "test",
+    "name": "test",
+    "password": "test"
 }
 
 ###
